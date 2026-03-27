@@ -13,9 +13,6 @@ jobs:
       name: pypi
       url: https://pypi.org/p/vantinel-sdk
 
-    permissions:
-      id-token: write  # Required for OIDC trusted publishing
-
     steps:
       - uses: actions/checkout@v4
 
@@ -28,4 +25,4 @@ jobs:
         run: uv build
 
       - name: Publish to PyPI
-        run: uv publish --trusted-publishing always
+        run: uv publish --token ${{ secrets.UV_PUBLISH_TOKEN }}
