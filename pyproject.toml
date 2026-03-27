@@ -3,8 +3,8 @@ requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "vantinel-sdk"
-version = "0.5.4"
+name = "vantinel-python"
+version = "0.5.5"
 description = "Lightweight observability and guardrails SDK for AI agents"
 readme = "README.md"
 requires-python = ">=3.9"
