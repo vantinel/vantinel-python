@@ -11,14 +11,14 @@ import time
 async def test_dry_run_mode():
     """Test that dry-run mode doesn't make network calls."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     client = VantinelClient(config)
 
     event = VantinelEvent(
         event_type="tool_call",
-        client_id="test_client",
+        project_id="test_client",
         session_id="test_session",
         agent_id="test_agent",
         tool_name="test_tool",

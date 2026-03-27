@@ -24,7 +24,7 @@ async def main():
     # This means only 1 in 10 events are sent to the collector
     config = VantinelConfig(
         api_key="vantinel_test_key",
-        client_id="high_volume_client",
+        project_id="high_volume_client",
     ).with_agent_id("production_agent").with_sampling_rate(0.1).with_dry_run().with_verbose()
 
     async with VantinelMonitor(config) as monitor:

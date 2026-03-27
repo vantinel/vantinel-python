@@ -205,7 +205,7 @@ class VantinelMonitor:
         # Create event
         event = VantinelEvent(
             event_type="tool_call",
-            client_id=self.config.client_id,
+            project_id=self.config.project_id,
             session_id=self.session_id,
             agent_id=self.config.agent_id,
             tool_name=tool_name,
@@ -270,7 +270,7 @@ class VantinelMonitor:
         """Create a dummy execution for sampled-out events."""
         dummy_event = VantinelEvent(
             event_type="tool_call",
-            client_id=self.config.client_id,
+            project_id=self.config.project_id,
             session_id=self.session_id,
             agent_id=self.config.agent_id,
             tool_name="sampled_out",
@@ -565,7 +565,7 @@ class VantinelMonitor:
 
         event = VantinelEvent(
             event_type="tool_error",
-            client_id=self.config.client_id,
+            project_id=self.config.project_id,
             session_id=self.session_id,
             agent_id=self.config.agent_id,
             tool_name=tool_name,

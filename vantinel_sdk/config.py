@@ -12,7 +12,7 @@ class VantinelConfig:
     """Configuration for the Vantinel SDK."""
 
     api_key: str
-    client_id: str
+    project_id: str
     agent_id: str = "default_agent"
     collector_url: str = "http://localhost:8000"
     session_budget: Optional[float] = None  # USD
@@ -44,15 +44,15 @@ class VantinelConfig:
         - VANTINEL_VERBOSE: Set to "true" for verbose logging
         """
         api_key = kwargs.get("api_key") or os.getenv("VANTINEL_API_KEY")
-        client_id = kwargs.get("client_id") or os.getenv("VANTINEL_CLIENT_ID")
+        project_id = kwargs.get("project_id") or os.getenv("VANTINEL_PROJECT_ID")
 
         if not api_key:
             raise ValueError(
                 "api_key is required. Set VANTINEL_API_KEY or pass api_key parameter."
             )
-        if not client_id:
+        if not project_id:
             raise ValueError(
-                "client_id is required. Set VANTINEL_CLIENT_ID or pass client_id parameter."
+                "project_id is required. Set VANTINEL_PROJECT_ID or pass project_id parameter."
             )
 
         agent_id = kwargs.get("agent_id") or os.getenv("VANTINEL_AGENT_ID", "default_agent")
@@ -74,7 +74,7 @@ class VantinelConfig:
 
         return cls(
             api_key=api_key,
-            client_id=client_id,
+            project_id=project_id,
             agent_id=agent_id,
             collector_url=collector_url,
             session_budget=session_budget,
@@ -84,7 +84,7 @@ class VantinelConfig:
             shadow_mode=shadow_mode,
             fail_mode=fail_mode,
             **{k: v for k, v in kwargs.items() if k not in [
-                'api_key', 'client_id', 'agent_id', 'collector_url',
+                'api_key', 'project_id', 'agent_id', 'collector_url',
                 'session_budget', 'timeout', 'dry_run', 'verbose', 'shadow_mode', 'fail_mode'
             ]}
         )

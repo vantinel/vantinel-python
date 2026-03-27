@@ -18,7 +18,7 @@ class VantinelEvent:
     """Telemetry event sent to the Vantinel Collector."""
 
     event_type: str
-    client_id: str
+    project_id: str
     session_id: str
     agent_id: str
     tool_name: str

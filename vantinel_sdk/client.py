@@ -123,7 +123,7 @@ class VantinelClient:
                 "X-Vantinel-Signature": signature,
                 "X-Vantinel-Timestamp": str(timestamp),
                 "X-Vantinel-Nonce": nonce,
-                "X-Vantinel-Client": self.config.client_id,
+                "X-Vantinel-Client": self.config.project_id,
             }
 
             response = await self.client.post(

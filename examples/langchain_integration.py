@@ -20,7 +20,7 @@ async def main():
     # Configure Vantinel
     vantinel_config = VantinelConfig(
         api_key="vantinel_test_key",
-        client_id="langchain_demo",
+        project_id="langchain_demo",
     ).with_agent_id("langchain_agent").with_session_budget(10.0).with_dry_run().with_verbose()
 
     async with VantinelMonitor(vantinel_config) as monitor:

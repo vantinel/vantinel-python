@@ -23,7 +23,7 @@ async def test_integration_with_collector():
     """
     config = VantinelConfig(
         api_key="test_integration_key",
-        client_id="test_integration_client",
+        project_id="test_integration_client",
     ).with_collector_url("http://localhost:8000")
 
     async with VantinelMonitor(config) as monitor:
@@ -52,7 +52,7 @@ async def test_zombie_loop_detection():
     """
     config = VantinelConfig(
         api_key="test_zombie_key",
-        client_id="test_zombie_client",
+        project_id="test_zombie_client",
     ).with_collector_url("http://localhost:8000")
 
     async with VantinelMonitor(config) as monitor:
@@ -78,7 +78,7 @@ async def test_budget_cap_enforcement():
     """Test that budget cap blocks expensive calls."""
     config = VantinelConfig(
         api_key="test_budget_key",
-        client_id="test_budget_client",
+        project_id="test_budget_client",
     ).with_collector_url("http://localhost:8000").with_session_budget(0.10)  # Very low budget
 
     async with VantinelMonitor(config) as monitor:
@@ -103,7 +103,7 @@ async def test_dangerous_tool_blocking():
     """Test that dangerous tools are blocked or require approval."""
     config = VantinelConfig(
         api_key="test_danger_key",
-        client_id="test_danger_client",
+        project_id="test_danger_client",
     ).with_collector_url("http://localhost:8000")
 
     async with VantinelMonitor(config) as monitor:
@@ -121,7 +121,7 @@ async def test_circuit_breaker_with_unreachable_collector():
     """Test circuit breaker when collector is unreachable."""
     config = VantinelConfig(
         api_key="test_cb_key",
-        client_id="test_cb_client",
+        project_id="test_cb_client",
     ).with_collector_url(
         "http://localhost:9999"  # Wrong port
     ).with_circuit_breaker(

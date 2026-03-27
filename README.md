@@ -33,7 +33,7 @@ async def main():
     # Configure the SDK
     config = VantinelConfig(
         api_key="vantinel_abc123",
-        client_id="my_company"
+        project_id="my_company"
     ).with_session_budget(5.0)
 
     # Create a monitor
@@ -60,7 +60,7 @@ The easiest way to monitor your tools:
 ```python
 from vantinel_sdk import VantinelMonitor, VantinelConfig
 
-config = VantinelConfig(api_key="key", client_id="company")
+config = VantinelConfig(api_key="key", project_id="company")
 monitor = VantinelMonitor(config)
 
 @monitor.watch_tool_decorator()
@@ -96,7 +96,7 @@ The SDK only sends **metadata**, never actual data:
 ```json
 {
   "event": "tool_call",
-  "client_id": "your_company",
+  "project_id": "your_company",
   "session_id": "sess_abc123",
   "tool_name": "search_database",
   "tool_args_hash": "md5:a3f8b9c2...",
@@ -135,7 +135,7 @@ monitor = VantinelMonitor(config)
 ```python
 config = VantinelConfig(
     api_key="test_key",
-    client_id="test_client"
+    project_id="test_client"
 ).with_agent_id("my_agent") \
  .with_session_budget(10.0) \
  .with_collector_url("https://collector.vantinel.com") \
@@ -152,7 +152,7 @@ config = VantinelConfig(
 # Monitor only 10% of traffic to reduce overhead
 config = VantinelConfig(
     api_key="key",
-    client_id="client"
+    project_id="client"
 ).with_sampling_rate(0.1)
 ```
 
@@ -190,7 +190,7 @@ For local development, use dry-run mode:
 ```python
 config = VantinelConfig(
     api_key="test_key",
-    client_id="test_client"
+    project_id="test_client"
 ).with_dry_run() \
  .with_verbose()  # Print debug info
 ```
@@ -239,7 +239,7 @@ The SDK includes a built-in circuit breaker that fails gracefully if the Collect
 ```python
 config = VantinelConfig(
     api_key="key",
-    client_id="client"
+    project_id="client"
 ).with_circuit_breaker(
     threshold=3,      # Open after 3 failures
     reset_timeout=30  # Reset after 30 seconds

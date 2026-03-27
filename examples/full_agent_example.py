@@ -119,7 +119,7 @@ async def main():
 
     # Configure Vantinel
     config = (
-        VantinelConfig(api_key="demo_key", client_id="demo_company")
+        VantinelConfig(api_key="demo_key", project_id="demo_company")
         .with_agent_id("example_agent")
         .with_session_budget(10.0)
         .with_dry_run()

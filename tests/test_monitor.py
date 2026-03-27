@@ -10,7 +10,7 @@ from vantinel_sdk.errors import ToolCallBlockedError
 async def test_monitor_creation():
     """Test creating a monitor."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     monitor = VantinelMonitor(config)
@@ -25,7 +25,7 @@ async def test_monitor_creation():
 async def test_watch_tool_success():
     """Test watching a successful tool execution."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     async with VantinelMonitor(config) as monitor:
@@ -40,7 +40,7 @@ async def test_watch_tool_success():
 async def test_watch_tool_error():
     """Test watching a failed tool execution."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     async with VantinelMonitor(config) as monitor:
@@ -57,7 +57,7 @@ async def test_watch_tool_error():
 def test_decorator_sync():
     """Test decorator with sync function."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     monitor = VantinelMonitor(config)
@@ -77,7 +77,7 @@ def test_decorator_sync():
 async def test_decorator_async():
     """Test decorator with async function."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     async with VantinelMonitor(config) as monitor:
@@ -96,7 +96,7 @@ async def test_decorator_async():
 async def test_sampling():
     """Test sampling reduces event count."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run().with_sampling_rate(0.1)
 
     async with VantinelMonitor(config) as monitor:
@@ -115,7 +115,7 @@ async def test_sampling():
 async def test_session_cost_tracking():
     """Test session cost tracking."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     async with VantinelMonitor(config) as monitor:
@@ -133,7 +133,7 @@ async def test_session_cost_tracking():
 async def test_tool_stats():
     """Test per-tool statistics."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     async with VantinelMonitor(config) as monitor:
@@ -158,7 +158,7 @@ async def test_tool_stats():
 async def test_context_manager():
     """Test async context manager."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     async with VantinelMonitor(config) as monitor:
@@ -173,7 +173,7 @@ async def test_context_manager():
 async def test_custom_session_id():
     """Test providing a custom session ID."""
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
 
     session_id = "my-custom-session-123"
@@ -186,13 +186,13 @@ async def test_custom_session_id():
 def test_config_from_env(monkeypatch):
     """Test configuration from environment variables."""
     monkeypatch.setenv("VANTINEL_API_KEY", "env_key")
-    monkeypatch.setenv("VANTINEL_CLIENT_ID", "env_client")
+    monkeypatch.setenv("VANTINEL_PROJECT_ID", "env_client")
     monkeypatch.setenv("VANTINEL_AGENT_ID", "env_agent")
     monkeypatch.setenv("VANTINEL_DRY_RUN", "true")
 
     config = VantinelConfig.from_env()
     assert config.api_key == "env_key"
-    assert config.client_id == "env_client"
+    assert config.project_id == "env_client"
     assert config.agent_id == "env_agent"
     assert config.dry_run is True
 
@@ -200,7 +200,7 @@ def test_config_from_env(monkeypatch):
 def test_config_builder():
     """Test configuration builder pattern."""
     config = (
-        VantinelConfig(api_key="test_key", client_id="test_client")
+        VantinelConfig(api_key="test_key", project_id="test_client")
         .with_agent_id("my_agent")
         .with_session_budget(10.0)
         .with_timeout(3.0)

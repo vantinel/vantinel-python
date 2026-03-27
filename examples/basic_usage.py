@@ -31,7 +31,7 @@ async def main():
     # Configure the SDK
     config = VantinelConfig(
         api_key="vantinel_test_key",
-        client_id="demo_company",
+        project_id="demo_company",
     ).with_agent_id("customer_support_bot").with_session_budget(5.0).with_dry_run().with_verbose()
 
     # Create a monitor

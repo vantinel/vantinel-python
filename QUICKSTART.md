@@ -21,7 +21,7 @@ from vantinel_sdk import VantinelMonitor, VantinelConfig
 # Configure
 config = VantinelConfig(
     api_key="your_api_key",
-    client_id="your_company"
+    project_id="your_company"
 )
 
 # Create monitor
@@ -69,7 +69,7 @@ result = await my_tool("test")
 # Use dry-run mode for testing
 config = VantinelConfig(
     api_key="test_key",
-    client_id="test_client"
+    project_id="test_client"
 ).with_dry_run().with_verbose()
 
 # Now you can test without a running collector
@@ -95,7 +95,7 @@ if stats:
 ```python
 config = VantinelConfig(
     api_key="your_api_key",
-    client_id="your_company"
+    project_id="your_company"
 ).with_session_budget(5.0)  # USD
 
 # Now if session cost exceeds $5, tools will be blocked
@@ -126,7 +126,7 @@ python examples/high_volume_sampling.py
 ```python
 config = VantinelConfig(
     api_key="key",
-    client_id="client"
+    project_id="client"
 ).with_agent_id("my_agent") \
  .with_session_budget(10.0) \
  .with_collector_url("https://collector.vantinel.com") \
@@ -140,7 +140,7 @@ config = VantinelConfig(
 
 ```bash
 export VANTINEL_API_KEY="your_key"
-export VANTINEL_CLIENT_ID="your_company"
+export VANTINEL_PROJECT_ID="your_company"
 export VANTINEL_COLLECTOR_URL="http://localhost:8000"
 export VANTINEL_SESSION_BUDGET="10.0"
 ```
@@ -204,7 +204,7 @@ Use sampling to reduce overhead:
 ```python
 config = VantinelConfig(
     api_key="key",
-    client_id="client"
+    project_id="client"
 ).with_sampling_rate(0.1)  # Monitor only 10% of calls
 ```
 

@@ -8,7 +8,7 @@ from vantinel_sdk import VantinelMonitor, VantinelConfig
 
 def make_monitor():
     config = VantinelConfig(
-        api_key="test_key", client_id="test_client"
+        api_key="test_key", project_id="test_client"
     ).with_dry_run()
     return VantinelMonitor(config)
 
