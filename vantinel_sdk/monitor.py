@@ -58,7 +58,7 @@ class ToolExecution:
         self.monitor._update_stats(self.event.tool_name, latency_ms, success=True)
 
         if self.monitor.trace and self.event.trace_payload is not None:
-             self.event.trace_payload["result"] = str(result)
+             self.event.trace_payload["result"] = str(result)[:4096]  # Limit response size
 
         # Send completion event (fire-and-forget, with reference tracking)
         if not self.monitor.config.dry_run:
@@ -108,11 +108,11 @@ class VantinelMonitor:
         Args:
             config: Configuration object
             session_id: Optional existing session ID (default: generate new UUID)
-            trace: Enable full payload tracing (Opt-in Debug Mode)
+            trace: Enable full payload tracing (Opt-in Debug Mode, same as config.log)
         """
         self.config = config
         self.session_id = session_id or str(uuid.uuid4())
-        self.trace = trace
+        self.trace = trace or config.log  # Either trace param or config.log enables payload logging
         self.client = VantinelClient(config)
 
         # Global metadata merged into every event

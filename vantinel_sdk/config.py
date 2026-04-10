@@ -26,6 +26,7 @@ class VantinelConfig:
     verbose: bool = False  # If True, print debug info
     shadow_mode: bool = False  # Run detection but never block; log "would have blocked" alerts
     fail_mode: str = "open"  # 'open' or 'closed'
+    log: bool = False  # If True, send full request/response payloads to collector for tracing
     circuit_breaker_threshold: int = 3  # Failures before opening circuit
     circuit_breaker_reset: float = 30.0  # seconds
 
@@ -68,6 +69,7 @@ class VantinelConfig:
         dry_run = kwargs.get("dry_run", os.getenv("VANTINEL_DRY_RUN", "").lower() == "true")
         verbose = kwargs.get("verbose", os.getenv("VANTINEL_VERBOSE", "").lower() == "true")
         shadow_mode = kwargs.get("shadow_mode", os.getenv("VANTINEL_SHADOW_MODE", "").lower() == "true")
+        log = kwargs.get("log", os.getenv("VANTINEL_LOG", "").lower() == "true")
         fail_mode = kwargs.get("fail_mode", os.getenv("VANTINEL_FAIL_MODE", "open").lower())
 
         collector_url = validate_collector_url(collector_url)
@@ -83,9 +85,10 @@ class VantinelConfig:
             verbose=verbose,
             shadow_mode=shadow_mode,
             fail_mode=fail_mode,
+            log=log,
             **{k: v for k, v in kwargs.items() if k not in [
                 'api_key', 'project_id', 'agent_id', 'collector_url',
-                'session_budget', 'timeout', 'dry_run', 'verbose', 'shadow_mode', 'fail_mode'
+                'session_budget', 'timeout', 'dry_run', 'verbose', 'shadow_mode', 'fail_mode', 'log'
             ]}
         )
 
@@ -134,6 +137,11 @@ class VantinelConfig:
     def with_verbose(self) -> "VantinelConfig":
         """Enable verbose logging."""
         self.verbose = True
+        return self
+
+    def with_log(self) -> "VantinelConfig":
+        """Enable request/response payload logging to the collector."""
+        self.log = True
         return self
 
     def with_circuit_breaker(
